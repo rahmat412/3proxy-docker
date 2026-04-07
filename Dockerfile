@@ -1,10 +1,9 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y 3proxy && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y squid && rm -rf /var/lib/apt/lists/*
 
-COPY 3proxy.cfg /etc/3proxy.cfg
+COPY squid.conf /etc/squid/squid.conf
 
 EXPOSE 3128
-EXPOSE 1080
 
-CMD ["3proxy", "/etc/3proxy.cfg"]
+CMD ["squid", "-N", "-f", "/etc/squid/squid.conf"]
